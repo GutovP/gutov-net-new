@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
-import { User } from 'src/app/core/models/user';
+
+import { ToastService } from '../../core/toast/toast.service';
+import { emailValidator, passwordGroupValidator } from '../../shared/validators';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -11,25 +14,35 @@ import { AuthService } from '../auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  user: User | undefined;
+  username: string = '';
   registerForm = this.fb.group({
-    firstName: [''],
-    lastName: [''],
-    email: [''],
-    password: ['']
+    username: ['', [Validators.required, Validators.minLength(5)]],
+    email: ['', [Validators.required, emailValidator()]],
+    pass: this.fb.group({
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      rePassword: [''],
+    },
+      {
+        validators: [passwordGroupValidator('password', 'rePassword')],
+      })
+
   })
 
-  constructor(private authService: AuthService, private fb: FormBuilder) { }
+  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router, private toastService: ToastService) { }
 
   ngOnInit(): void {
+
   }
 
   registerHandler() {
-    const { firstName, lastName, email, password } = this.registerForm.value;
-    this.authService.register(firstName, lastName, email, password).subscribe(
+    if (this.registerForm.invalid) { return; }
+    this.username = this.registerForm.get('username')?.value;
+    const { username, email, pass: { password, rePassword } } = this.registerForm.value;
+    this.authService.register(username, email, password, rePassword).subscribe(
       (data) => {
-        this.user = data;
+        this.toastService.activate(` successfully registred ${this.username}`);
+        this.router.navigate(['/users']);
       }
-    )
+    );
   }
 }

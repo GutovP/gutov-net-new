@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        ".git": true,
+        ".angular": true,
+        "node_modules": true
+    }
+}

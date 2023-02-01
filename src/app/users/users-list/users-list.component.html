@@ -1,22 +1,20 @@
-<p class="text-center">Users</p>
+<h1 class="text-center">Users</h1>
 
 <table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">FirstName</th>
-            <th scope="col">LastName</th>
+            <th scope="col">Username</th>
             <th scope="col">Email</th>
             <th scope="col">Password</th>
         </tr>
     </thead>
     <tbody *ngFor="let user of users">
         <tr>
-            <th scope="row">{{user.Id}}</th>
-            <td>{{user.FirstName}}</td>
-            <td>{{user.LastName}}</td>
-            <td>{{user.Email}}</td>
-            <td>{{user.Password}}</td>
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.password}}</td>
         </tr>
     </tbody>
 </table>

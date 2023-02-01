@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 
+import { ToastModule } from './toast/toast.module';
+
 
 
 @NgModule({
@@ -12,7 +14,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule, // so we can use ngFor
     RouterModule, // so we can use <router-outlet> and routerLink
+    ToastModule
   ],
-  exports: [HeaderComponent]
+  exports: [HeaderComponent, ToastModule]
 })
 export class CoreModule { }
