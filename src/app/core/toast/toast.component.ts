@@ -44,6 +44,6 @@ export class ToastComponent implements OnInit, OnDestroy {
   private hide() {
     this.toastElement.style.opacity = 0;
 
-    window.setTimeout(() => (this.toastElement.style.zIndex = 0), 400)
+    window.setTimeout(() => (this.toastElement.style.zIndex = 0), 3000)
   }
 }

@@ -5,10 +5,6 @@ import { PageNotFoundComponent } from './page-not-found.component';
 
 const routes: Routes = [
   {
-    path: 'home',
-    redirectTo: ''
-  },
-  {
     path: '',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule)
   },

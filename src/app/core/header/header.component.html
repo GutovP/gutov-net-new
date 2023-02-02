@@ -17,7 +17,7 @@
                     </a>
                 </li>
             </ul>
-            <ul class="ms-auto" *ngIf="!isLoggedIn">
+            <ul class="ms-auto" *ngIf="!isLoggedIn || !notEmpty">
                 <li class="navbar-nav">
                     <a *ngFor="let item of unAuthItems" [routerLink]="item.link" class="nav-link text-white"
                         routerLinkActive="router-link-active" data-toggle="collapse"
@@ -26,7 +26,7 @@
                     </a>
                 </li>
             </ul>
-            <ul class="ms-auto" *ngIf="isLoggedIn">
+            <ul class="ms-auto" *ngIf="isLoggedIn && notEmpty">
                 <li class="navbar-nav">
                     <a *ngFor="let item of authItems" [routerLink]="item.link" class="nav-link text-white"
                         routerLinkActive="router-link-active" data-toggle="collapse"

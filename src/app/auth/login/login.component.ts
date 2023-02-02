@@ -30,13 +30,14 @@ export class LoginComponent implements OnInit {
     this.authService.login(email, password).subscribe(
       (data) => {
         if (data == '') {
+
           return this.toastService.activate('Invalid Email or Password');
         }
         this.name = data.map((user: { username: string }) => {
           return user.username;
         });
         this.toastService.activate(` successfully logged as ${this.name}`);
-        this.router.navigate(['']);
+        this.router.navigate(['/users']);
       }
     );
   }

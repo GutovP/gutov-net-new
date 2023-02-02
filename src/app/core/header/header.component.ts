@@ -18,13 +18,16 @@ export class HeaderComponent implements OnInit {
   get isLoggedIn() {
     return this.authService.isLoggedIn;
   }
+  get notEmpty() {
+    return this.authService.notEmpty;
+  }
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
 
     this.headerItems = [
-      { caption: 'Home', path: 'home', link: ['/home'] },
+      { caption: 'Home', path: 'home', link: [''] },
       { caption: 'Users', path: 'users', link: ['/users'] },
     ];
 

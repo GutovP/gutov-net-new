@@ -11,38 +11,43 @@ const baseUrl = environment.apiURL;
   providedIn: 'root'
 })
 export class AuthService implements OnDestroy {
-  private user$$ = new BehaviorSubject<User | null | undefined>(undefined);
-  user$ = this.user$$.asObservable().pipe(filter((value): value is User | null => value !== undefined));
-  user: User | null = null;
+  private user$$ = new BehaviorSubject<User[] | null | undefined>(undefined);
+  user$ = this.user$$.asObservable().pipe(filter((value): value is User[] | null => value !== undefined));
+  user: User[] | null = null;
   subscription: Subscription;
 
   get isLoggedIn() {
-    return this.user !== null;
+    return this.user !== null
+  }
+  get notEmpty() {
+    return this.user?.length !== 0;
   }
   constructor(private http: HttpClient) {
     this.subscription = this.user$.subscribe((user) => {
       this.user = user;
     })
   }
-
-
   register(username: string, email: string, password: string, rePassword: string) {
-    return this.http.post<User>(`${baseUrl}/register`, { username, email, password, rePassword }).pipe(
+    return this.http.post<User[]>(`${baseUrl}/register`, { username, email, password, rePassword }).pipe(
       tap((user) => {
         this.user$$.next(user);
       })
     );
   }
-
   login(email: string, password: string) {
     return this.http.post<any>(`${baseUrl}/login`, { email, password }).pipe(
-      tap((user) => {
-        this.user$$.next(user);
+      tap((data) => {
+        this.user$$.next(data);
       })
     );
   }
-
-
+  logout() {
+    return this.http.get<void>(`${baseUrl}/logout`, {}).pipe(
+      tap(() => {
+        this.user$$.next(null);
+      })
+    );
+  }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
