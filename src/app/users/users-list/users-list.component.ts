@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/core/models/user';
 import { UsersService } from '../users.service';
 
@@ -11,7 +12,11 @@ import { UsersService } from '../users.service';
 export class UsersListComponent implements OnInit {
   users: User[] | undefined;
 
-  constructor(private usersService: UsersService) { }
+  get isLoggedIn() {
+    return this.authService.isLoggedIn;
+  }
+
+  constructor(private usersService: UsersService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.loadAllUsers();

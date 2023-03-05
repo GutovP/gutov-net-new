@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
-import { User } from 'src/app/core/models/user';
-import { ToastService } from 'src/app/core/toast/toast.service';
+import { ToastService } from '../../core/toast/toast.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -19,7 +19,12 @@ export class LoginComponent implements OnInit {
     password: ['', Validators.required]
   })
 
-  constructor(private authService: AuthService, private toastService: ToastService, private fb: FormBuilder, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private toastService: ToastService,
+    private fb: FormBuilder,
+    private router: Router,
+    private cookie: CookieService) { }
 
   ngOnInit(): void {
   }
@@ -29,13 +34,16 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginForm.value;
     this.authService.login(email, password).subscribe(
       (data) => {
+        console.log(data);
         if (data == '') {
 
           return this.toastService.activate('Invalid Email or Password');
         }
         this.name = data.map((user: { username: string }) => {
+
           return user.username;
         });
+
         this.toastService.activate(` successfully logged as ${this.name}`);
         this.router.navigate(['/users']);
       }

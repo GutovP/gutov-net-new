@@ -1,0 +1,45 @@
+<div class="container">
+    <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+        <fieldset>
+            <h3 class="text-center mt-3">User Info:</h3>
+            <ng-container *ngIf="showEditMode">
+                <div class="mt-5">
+                    <label for="username">username</label>
+                    <input formControlName="username" type="text" class="form-control" id="username"
+                        placeholder="Enter username">
+                </div>
+                <p *ngIf="profileForm.get('username')?.touched && profileForm.get('username')?.errors?.['required']"
+                    class="error">
+                    Username is required! </p>
+                <p *ngIf="profileForm.get('username')?.errors?.['minlength']" class="error">
+                    Username must be at least 5 characters</p>
+            </ng-container>
+            <ng-container *ngIf="!showEditMode">
+                {{user.username}}
+            </ng-container>
+            <h3 class="text-center mt-3">Email:</h3>
+            <ng-container *ngIf="showEditMode">
+                <div class="mt-5">
+                    <label for="email">email</label>
+                    <input formControlName="email" type="text" class="form-control" id="email"
+                        placeholder="Enter email">
+                </div>
+                <p *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.errors?.['required']"
+                    class="error">
+                    Email is required! </p>
+                <p *ngIf="profileForm.get('email')?.errors?.['emailValidator']" class="error">
+                    Email is not valid</p>
+            </ng-container>
+            <ng-container *ngIf="!showEditMode">
+                {{user.email}}
+            </ng-container>
+            <ng-template #edit>
+                <button class="edit-button" type="submit">Save</button>
+            </ng-template>
+            <ng-template #nonEdit>
+                <button class="edit-button" type="button" (click)="toggleEditMode()">Edit</button>
+            </ng-template>
+            <ng-container *ngTemplateOutlet="showEditMode ? edit : nonEdit"></ng-container>
+        </fieldset>
+    </form>
+</div>
