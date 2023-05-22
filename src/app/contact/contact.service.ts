@@ -1,21 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment';
-import { User } from '../core/models/user';
-
 
 const baseUrl = environment.apiURL;
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class ContactService {
 
   constructor(private http: HttpClient) { }
 
-  loadUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${baseUrl}/users`);
+  sendMessage(name: string, email: string, subject: string, message: string) {
+    return this.http.post<any>(`${baseUrl}/contact`, { name, email, subject, message });
   }
 }

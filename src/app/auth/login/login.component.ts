@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginForm.value;
     this.authService.login(email, password).subscribe(
       (data) => {
-        console.log(data);
         if (data == '') {
 
           return this.toastService.activate('Invalid Email or Password');

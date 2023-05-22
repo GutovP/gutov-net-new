@@ -1,0 +1,48 @@
+<div class="container pt-4 custom-width">
+    <form [formGroup]="contactForm" (ngSubmit)="messageHandler()" class="bg-info p-4">
+        <fieldset>
+            <h2 class="text-center">Contact Form</h2>
+
+            <!-- name -->
+            <div class="mt-3">
+                <label for="name">Name</label>
+                <input formControlName="name" type="text" class="form-control" id="name" placeholder="Enter Name">
+            </div>
+            <p *ngIf="contactForm.get('name')?.touched && contactForm.get('name')?.errors?.['required']" class="error">
+                Your Name is required</p>
+
+            <!-- email -->
+            <div class="mt-3">
+                <label for="email">Email</label>
+                <input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter Email">
+            </div>
+            <p *ngIf="contactForm.get('email')?.touched && contactForm.get('email')?.errors?.['required']"
+                class="error">
+                Email is required! </p>
+
+            <!-- subject -->
+            <div class="mt-3">
+                <label for="subject">Subject</label>
+                <input formControlName="subject" type="text" class="form-control" id="subject"
+                    placeholder="Enter Subject">
+            </div>
+            <p *ngIf="contactForm.get('subject')?.touched && contactForm.get('subject')?.errors?.['required']"
+                class="error">
+                Subject is required</p>
+
+            <!-- message -->
+            <div class="mt-3">
+                <label for="message">Message</label>
+                <textarea formControlName="message" type="text" class="form-control" id="message" rows="4"
+                    placeholder="Enter Message"></textarea>
+            </div>
+            <p *ngIf="contactForm.get('message')?.touched && contactForm.get('message')?.errors?.['required']"
+                class="error">
+                Message is required! </p>
+
+            <div class="d-grid col-6 mx-auto mt-3 mb-3">
+                <button [disabled]="contactForm.invalid" class="btn btn-primary">Send</button>
+            </div>
+        </fieldset>
+    </form>
+</div>

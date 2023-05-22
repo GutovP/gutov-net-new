@@ -1,37 +1,42 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-    <div class="container-fluid">
+    <div class="container-fluid ">
         <a class="navbar-brand" routerLink="">
             <img src="../../../assets/img/Gutov logo_large.png" style="width: 120px;" />
         </a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
             (click)="navbarCollapsed = !navbarCollapsed" [attr.aria-expanded]="!navbarCollapsed"
             aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarToggler">
-            <ul class="">
-                <li class="navbar-nav ">
+            <ul>
+                <li class="navbar-nav">
                     <a *ngFor="let item of headerItems" [routerLink]="item.link" class="nav-link text-white"
-                        data-toggle="collapse" data-target=".navbar-collapse.show">{{ item.caption }}
+                        routerLinkActive="router-link-active" [routerLinkActiveOptions]="{exact: true}"
+                        data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">{{item.caption }}
                     </a>
                 </li>
             </ul>
+            <div class="container my-div">
+                <ul class="text-white text-center display-6">
+                    {{$clock | async | date:'HH:mm:ss'}}
+                </ul>
+            </div>
+
             <ul class="ms-auto" *ngIf="!isLoggedIn || !notEmpty">
                 <li class="navbar-nav">
                     <a *ngFor="let item of unAuthItems" [routerLink]="item.link" class="nav-link text-white"
-                        routerLinkActive="router-link-active" data-toggle="collapse"
-                        data-target=".navbar-collapse.show">{{
-                        item.caption }}
+                        routerLinkActive="router-link-active" data-bs-toggle="collapse"
+                        data-bs-target=".navbar-collapse.show">{{item.caption }}
                     </a>
                 </li>
             </ul>
             <ul class="ms-auto" *ngIf="isLoggedIn && notEmpty">
                 <li class="navbar-nav">
                     <a *ngFor="let item of authItems" [routerLink]="item.link" class="nav-link text-white"
-                        routerLinkActive="router-link-active" data-toggle="collapse"
-                        data-target=".navbar-collapse.show">{{
-                        item.caption }}
+                        routerLinkActive="router-link-active" data-bs-toggle="collapse"
+                        data-bs-target=".navbar-collapse.show">{{item.caption }}
                     </a>
                 </li>
             </ul>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { interval, map } from 'rxjs';
 
 import { HeaderItems } from './header-items';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -29,6 +30,7 @@ export class HeaderComponent implements OnInit {
     this.headerItems = [
       { caption: 'Home', path: 'home', link: [''] },
       { caption: 'Users', path: 'users', link: ['/users'] },
+      { caption: 'Contact', path: 'contact', link: ['/contact'] },
     ];
 
     this.unAuthItems = [
@@ -42,4 +44,7 @@ export class HeaderComponent implements OnInit {
     ];
   }
 
+  $clock = interval(1000).pipe(
+    map(() => new Date())
+  );
 }

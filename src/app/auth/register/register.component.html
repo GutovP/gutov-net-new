@@ -1,11 +1,13 @@
-<div class="container w-25 mt-3 border border-3">
-    <form [formGroup]="registerForm" (ngSubmit)="registerHandler()">
+<div class="container pt-4 custom-width">
+    <form [formGroup]="registerForm" (ngSubmit)="registerHandler()" class="bg-info p-4">
         <fieldset>
             <h2 class="text-center mt-3">Registration Form</h2>
-
+            <h5 class=" blink-text"> This app is used for demonstration purposes. Please do not enter
+                your real
+                credentials.</h5>
             <!-- username -->
             <div class="mt-5">
-                <label for="username">username</label>
+                <label for="username">Username</label>
                 <input formControlName="username" type="text" class="form-control" id="username"
                     placeholder="Enter username">
             </div>

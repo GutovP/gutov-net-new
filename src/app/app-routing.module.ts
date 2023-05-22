@@ -16,6 +16,10 @@ const routes: Routes = [
     path: 'users',
     loadChildren: () => import('./users/users.module').then((m) => m.UsersModule)
   },
+  {
+    path: 'contact',
+    loadChildren: () => import('./contact/contact.module').then((m) => m.ContactModule)
+  },
 
   // path:'**' must be declared last
   {

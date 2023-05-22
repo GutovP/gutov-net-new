@@ -1,15 +1,8 @@
 .toast-container {
-  /*-webkit-transition-property: opacity, bottom, left, right, width, margin, border-radius;
-    transition-property: opacity, bottom, left, right, width, margin, border-radius;
-    -webkit-transition-duration: 1.0s;
-            transition-duration: 1.0s;
-    -webkit-transition-timing-function: ease;
-            transition-timing-function: ease;*/
   position: fixed;
   top: 80%;
   right: 42%;
   border-radius: 25px;
-  overflow: scroll;
   background: rgba(0, 0, 0, 0.4);
   z-index: 9999;
   opacity: 0;
@@ -24,6 +17,7 @@
 }
 
 .toast-card {
+  border-radius: 25px;
   width: 100%;
   z-index: 1;
   padding: 2px;

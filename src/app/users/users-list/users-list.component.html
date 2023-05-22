@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container pt-4">
     <h1 *ngIf="!isLoggedIn" class="text-center mt-5">You have to login in order to see the user list</h1>
     <ng-container *ngIf="isLoggedIn">
         <h1 class="text-center">Users</h1>
-        <table class="table">
+        <table class="table bg-light">
             <thead>
                 <tr>
                     <th scope="col">#</th>

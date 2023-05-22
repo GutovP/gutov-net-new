@@ -9,7 +9,7 @@ import { ToastService } from './toast.service';
   styleUrls: ['./toast.component.scss']
 })
 export class ToastComponent implements OnInit, OnDestroy {
-  private subs = new Subscription();
+  private subscription = new Subscription();
   private defaults = {
     title: '',
     message: 'default tost message'
@@ -20,7 +20,7 @@ export class ToastComponent implements OnInit, OnDestroy {
 
   constructor(private toastService: ToastService) {
     //adding the service to new subscription so we can destroy it later
-    this.subs.add(this.toastService.toast$.subscribe((toastMessage) => {
+    this.subscription.add(this.toastService.toast$.subscribe((toastMessage) => {
       this.activate(toastMessage.message);
     }))
   }
@@ -33,7 +33,7 @@ export class ToastComponent implements OnInit, OnDestroy {
     this.toastElement = document.getElementById('toast');
   }
   ngOnDestroy(): void {
-    this.subs.unsubscribe();
+    this.subscription.unsubscribe();
   }
   private show() {
     this.toastElement.style.opacity = 1;
