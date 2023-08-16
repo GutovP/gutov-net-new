@@ -13,7 +13,7 @@ const baseUrl = environment.apiURL;
 export class AuthService implements OnDestroy {
   private user$$ = new BehaviorSubject<User | null | undefined>(undefined);
   user$ = this.user$$.asObservable().pipe(filter((value): value is User | null => value !== undefined));
-  user: User | null = null;
+  user!: User | null;
   subscription: Subscription;
 
   get isLoggedIn() {
@@ -54,7 +54,7 @@ export class AuthService implements OnDestroy {
     );
   }
   getProfile(): Observable<any> {
-    return this.http.get<any>(`${baseUrl}/profile/:id`).pipe(
+    return this.http.get<any>(`${baseUrl}/profile/${this.user?.id}`).pipe(
       tap(
         (user) => {
           this.user$$.next(user);
@@ -67,7 +67,7 @@ export class AuthService implements OnDestroy {
     )
   }
   setProfile(username: string, email: string, password: string): Observable<User> {
-    return this.http.put<User>('/api/edit/:id', { username, email, password }).pipe(
+    return this.http.put<User>(`/api/edit/${this.user?.id}`, { username, email, password }).pipe(
       tap(user => this.user$$.next(user))
     );
   }
