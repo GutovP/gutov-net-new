@@ -20,7 +20,7 @@ export class ToastService {
     }
   }
 
-  activate(message?: string) {
+  activate(message?: any) {
     this.toast$$.next(<ToastMessage>{ message: message });
   }
 }

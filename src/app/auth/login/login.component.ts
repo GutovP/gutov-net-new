@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { throwError } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { ToastService } from '../../core/toast/toast.service';
 import { AuthService } from '../auth.service';
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit {
   loginHandler() {
     if (this.loginForm.invalid) { return; }
     const { email, password } = this.loginForm.value;
+
     this.authService.login(email, password).subscribe(
       (data) => {
         if (data == '') {
@@ -45,6 +48,9 @@ export class LoginComponent implements OnInit {
 
         this.toastService.activate(` successfully logged as ${this.name}`);
         this.router.navigate(['/users']);
+      },
+      (error: HttpErrorResponse) => {
+        this.toastService.activate(error.error.message);
       }
     );
   }

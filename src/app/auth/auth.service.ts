@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, catchError, filter, map, Observable, Subscription, tap, throwError } from 'rxjs';
 
 import { User } from '../core/models/user';
@@ -32,6 +32,10 @@ export class AuthService implements OnDestroy {
       this.user = user;
     })
   }
+  errorHandler(error: HttpErrorResponse) {
+
+    return throwError(error);
+  }
   register(username: string, email: string, password: string, rePassword: string): Observable<User> {
     return this.http.post<User>(`${baseUrl}/register`, { username, email, password, rePassword }).pipe(
       tap((user) => {
@@ -41,6 +45,7 @@ export class AuthService implements OnDestroy {
   }
   login(email: string, password: string): Observable<any> {
     return this.http.post<any>(`${baseUrl}/login`, { email, password }).pipe(
+      catchError(this.errorHandler),
       tap((data) => {
         this.user$$.next(data);
       })

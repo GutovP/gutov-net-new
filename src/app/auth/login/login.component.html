@@ -7,6 +7,7 @@
             <div class="mt-3">
                 <label for="email">Email</label>
                 <input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter Email">
+
             </div>
             <p *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required']" class="error">
                 Email is required! </p>
@@ -24,6 +25,7 @@
             <div class="d-grid col-6 mx-auto mt-3 mb-3">
                 <button [disabled]="loginForm.invalid" class="btn btn-primary">Login</button>
             </div>
+
         </fieldset>
     </form>
 </div>
