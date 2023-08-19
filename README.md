@@ -1,27 +1,24 @@
-# GutovNetNew
+# Table of contents
+* [General info](#general-info)
+* [Development server](#development-server)
+* [Technologies](#technologies)
+* [Setup](#setup)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.4.
+## General info
+Project name: GutovNet.
+This project was generated with Angular.
+It's a smiple client-side web application with dynamic and authentication pages.
 
 ## Development server
+ 
+ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Technologies
+1. Angular cli 13+
+2. Bootstrap 5
+3. Jquery 3.6
+4. RxJs 7.5
+5. Ngx-pagination 6
 
-## Code scaffolding
+## Setup
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
